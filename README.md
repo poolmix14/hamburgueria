@@ -7,9 +7,9 @@ Ao tocar em **Pedir nº X**, o WhatsApp (21) 96605-0013 abre com a primeira mens
 *PEDIDO Nº 4 — COMBO CASAL NOSSO SMASH BACON*
 R$ 68,90
 
-Olá, Nossa Hamburgueria! Quero fazer esse pedido 🍔
+Olá, Nossa Hamburgueria! Quero fazer esse pedido
 
-Foto: https://SEU-USUARIO.github.io/nossa-hamburgueria/img/4.jpg
+https://poolmix14.github.io/hamburgueria/p/4/
 ```
 
 ## Publicar no GitHub Pages
@@ -25,3 +25,8 @@ Tudo fica no começo do `<script>` do `index.html`:
   Para um lanche novo: coloque a foto em `img/` e adicione uma linha em `ITENS`.
 
 Link direto para um item: `.../#pedido-4`
+
+## Miniatura da foto no WhatsApp
+A pasta `p/` tem uma página por pedido (ex.: `p/7/`). O link dela vai no fim da mensagem e faz o
+WhatsApp mostrar a foto do lanche ao lado do card. Depois de adicionar ou mudar um lanche em `ITENS`,
+rode `python gerar-paginas.py` e suba a pasta `p/` de novo.
