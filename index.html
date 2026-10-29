@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nossa Hamburgueria Artesanal — Cardápio</title>
+<meta name="description" content="Cardápio online da Nossa Hamburgueria Artesanal. Delivery em Cascadura, das 18h às 00h. Peça pelo WhatsApp.">
+<meta property="og:title" content="Nossa Hamburgueria Artesanal — Cardápio">
+<meta property="og:description" content="Da nossa chapa direto pra sua casa. Delivery em Cascadura, 18h às 00h.">
+<meta property="og:image" content="img/logo.jpg">
+<meta name="theme-color" content="#0f0d0b">
+<link rel="icon" href="img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f0d0b; --surface:#1a1714; --surface-2:#24201b; --line:#2f2a23;
+    --gold:#eaa63a; --gold-2:#f6c766; --cream:#f3ebdd; --muted:#a89d8c;
+    --wa:#25d366; --wa-dark:#1ebe5b;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--cream);font-family:Inter,system-ui,sans-serif;line-height:1.45;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  a{color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+
+  /* ---------- Topo ---------- */
+  .hero{padding:28px 0 20px;text-align:center;background:
+      radial-gradient(ellipse 70% 60% at 50% 0%, rgba(234,166,58,.16), transparent 70%)}
+  .hero .logo{width:150px;height:150px;border-radius:50%;margin:0 auto 14px;object-fit:cover;box-shadow:0 0 0 3px var(--line)}
+  .hero h1{font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(26px,5vw,38px);letter-spacing:.5px;text-transform:uppercase}
+  .hero h1 span{color:var(--gold)}
+  .hero p.tag{color:var(--muted);margin-top:4px}
+  .info{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:16px}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:14px;font-weight:500}
+  .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+  .pill.open .dot{background:var(--wa);box-shadow:0 0 0 3px rgba(37,211,102,.2)}
+  .pill.closed .dot{background:#e5484d}
+  .how{margin:18px auto 0;max-width:560px;font-size:14px;color:var(--muted)}
+  .how b{color:var(--cream)}
+
+  /* ---------- Filtros ---------- */
+  .bar{position:sticky;top:0;z-index:20;background:rgba(15,13,11,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .bar .wrap{display:flex;gap:10px;align-items:center;padding-top:10px;padding-bottom:10px}
+  .chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;flex:1}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{white-space:nowrap;padding:8px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:600;font-size:14px;color:var(--muted);transition:.15s}
+  .chip[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#1a1205}
+  .search{flex:0 0 auto;width:200px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--cream);font:inherit;font-size:14px}
+  .search::placeholder{color:var(--muted)}
+  .search:focus,.chip:focus-visible,.btn:focus-visible{outline:2px solid var(--gold-2);outline-offset:2px}
+  @media (max-width:640px){.bar .wrap{flex-direction:column;align-items:stretch}.search{width:100%}}
+
+  /* ---------- Seções e cards ---------- */
+  main{padding:8px 0 110px}
+  .section{padding-top:26px}
+  .section h2{font-family:Oswald,sans-serif;font-weight:700;text-transform:uppercase;font-size:22px;letter-spacing:.5px;display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+  .section h2 small{font-family:Inter;font-weight:500;font-size:13px;color:var(--muted);text-transform:none;letter-spacing:0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+  @media (max-width:560px){.grid{grid-template-columns:1fr 1fr;gap:10px}}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,border-color .15s}
+  .card:hover{border-color:#4a3f30;transform:translateY(-2px)}
+  .card .ph{position:relative;aspect-ratio:4/5;background:#000;overflow:hidden}
+  .card .ph img{width:100%;height:100%;object-fit:cover;object-position:top}
+  .card .ph button{position:absolute;inset:0}
+  .num{position:absolute;top:10px;left:10px;min-width:44px;height:44px;padding:0 10px;border-radius:12px;background:var(--gold);color:#1a1205;font-family:Oswald,sans-serif;font-weight:700;font-size:22px;display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.45);pointer-events:none}
+  .badge{position:absolute;top:10px;right:10px;padding:4px 8px;border-radius:8px;background:#111;border:1px solid var(--gold);color:var(--gold-2);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;pointer-events:none}
+  .card .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .card h3{font-family:Oswald,sans-serif;font-weight:500;font-size:18px;line-height:1.2;text-transform:uppercase;letter-spacing:.2px}
+  .card .desc{font-size:13px;color:var(--muted);flex:1}
+  .card .foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px}
+  .price{font-family:Oswald,sans-serif;font-weight:700;font-size:22px;color:var(--gold-2);white-space:nowrap}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 14px;border-radius:12px;background:var(--wa);color:#06260f;font-weight:700;font-size:14px;text-decoration:none;transition:background .15s;white-space:nowrap}
+  .btn:hover{background:var(--wa-dark)}
+  .btn svg{width:18px;height:18px;flex:0 0 auto}
+  @media (max-width:560px){
+    .card h3{font-size:15px;flex:1}.card .desc{display:none}
+    .card .foot{flex-direction:column;align-items:stretch}
+    .price{font-size:19px}.btn{padding:10px 8px;font-size:13px}
+    .num{min-width:38px;height:38px;font-size:19px;top:8px;left:8px}
+    .badge{font-size:10px;top:8px;right:8px}
+  }
+  .empty{color:var(--muted);text-align:center;padding:40px 0;display:none}
+
+  /* ---------- Rodapé ---------- */
+  footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:14px;text-align:center}
+  footer .links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 20px;margin-bottom:10px}
+  footer a{color:var(--cream);text-decoration:none;font-weight:500}
+  footer a:hover{color:var(--gold-2)}
+
+  /* ---------- Botão flutuante ---------- */
+  .fab{position:fixed;right:16px;bottom:16px;z-index:30;box-shadow:0 8px 24px rgba(0,0,0,.5);border-radius:999px;padding:13px 18px}
+
+  /* ---------- Foto ampliada ---------- */
+  dialog{border:0;padding:0;background:transparent;max-width:min(520px,94vw);margin:auto;color:var(--cream)}
+  dialog::backdrop{background:rgba(0,0,0,.85)}
+  .lb{background:var(--surface);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
+  .lb img{width:100%;max-height:72vh;object-fit:contain;background:#000}
+  .lb .row{display:flex;align-items:center;gap:12px;padding:12px 14px}
+  .lb .row .t{flex:1;min-width:0}
+  .lb .row .t b{display:block;font-family:Oswald,sans-serif;font-weight:500;text-transform:uppercase;font-size:17px}
+  .lb .row .t span{color:var(--gold-2);font-family:Oswald,sans-serif;font-weight:700;font-size:18px}
+  .close{position:absolute;top:8px;right:8px;width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.65);font-size:22px;line-height:1}
+  .lbwrap{position:relative}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="logo" src="img/logo.jpg" alt="Logo Nossa Hamburgueria Artesanal">
+    <h1>Nossa <span>Hamburgueria</span></h1>
+    <p class="tag">Feito para reunir · Da nossa chapa direto pra sua casa</p>
+    <div class="info">
+      <span class="pill" id="status"><span class="dot"></span><span id="statusTxt">18h às 00h</span></span>
+      <span class="pill">🛵 Delivery em Cascadura</span>
+    </div>
+    <p class="how">Escolha o lanche e toque em <b>Pedir</b>. O WhatsApp abre com o <b>número e o nome do pedido</b> já escritos — é só enviar e combinar os detalhes com a gente.</p>
+  </div>
+</header>
+
+<nav class="bar" aria-label="Categorias">
+  <div class="wrap">
+    <div class="chips" id="chips"></div>
+    <input class="search" id="q" type="search" placeholder="Buscar lanche ou nº…" aria-label="Buscar no cardápio">
+  </div>
+</nav>
+
+<main class="wrap" id="menu"></main>
+<p class="empty wrap" id="empty">Nada encontrado. Tente outro nome ou número.</p>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a id="waFooter" href="#" target="_blank" rel="noopener">WhatsApp (21) 96605-0013</a>
+      <a href="https://www.instagram.com/hamburgueria.nossa" target="_blank" rel="noopener">Instagram @hamburgueria.nossa</a>
+      <a href="mailto:nossahamburgueria@yahoo.com">nossahamburgueria@yahoo.com</a>
+    </div>
+    <p>Delivery em Cascadura · Todos os dias das 18h às 00h</p>
+  </div>
+</footer>
+
+<a class="btn fab" id="fab" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"></a>
+
+<dialog id="lb">
+  <div class="lbwrap">
+    <div class="lb">
+      <img id="lbImg" alt="">
+      <div class="row">
+        <div class="t"><b id="lbName"></b><span id="lbPrice"></span></div>
+        <a class="btn" id="lbBtn" href="#" target="_blank" rel="noopener"></a>
+      </div>
+    </div>
+    <button class="close" id="lbClose" aria-label="Fechar">×</button>
+  </div>
+</dialog>
+
+<script>
+/* =====================================================================
+   CONFIGURAÇÃO — edite aqui
+   ===================================================================== */
+const WHATSAPP = "5521966050013";          // DDI + DDD + número, só dígitos
+const LOJA     = "Nossa Hamburgueria";
+const ABRE = 18, FECHA = 24;               // horário de funcionamento (24 = meia-noite)
+const MOSTRAR_LINK_FOTO = true;            // envia o link da foto do lanche na mensagem
+
+const CATEGORIAS = [
+  { id:"individual", nome:"Individuais",   sub:"lanche + batata + refri lata" },
+  { id:"casal",      nome:"Para dois",     sub:"combos casal" },
+  { id:"familia",    nome:"Família",       sub:"pra galera toda" },
+  { id:"porcoes",    nome:"Porções",       sub:"pra acompanhar" },
+];
+
+/* num = número do pedido (o mesmo nome do arquivo da foto em img/) */
+const ITENS = [
+  // ---- Destaque
+  { num:"26", cat:"casal", tag:"Combo do dia", nome:"Combo do Dia", preco:68.90, img:"26.jpg",
+    desc:"2x Nosso Clássico + Coca-Cola 1,5L." },
+
+  // ---- Individuais
+  { num:"15", cat:"individual", nome:"Combo Nosso Smash", preco:29.90, img:"15.jpg",
+    desc:"Pão de brioche, blend de 100g, cheddar derretido, cebola caramelizada e molho da casa. Com batata frita e Coca-Cola lata." },
+  { num:"2", cat:"individual", tag:"Lançamento", nome:"Nosso Chicken", preco:31.90, img:"2.jpg",
+    desc:"Hambúrguer de frango empanado. Com batata frita e Coca-Cola lata." },
+  { num:"5", cat:"individual", nome:"Combo Smash Bacon", preco:34.90, img:"5.jpg",
+    desc:"Pão de brioche, smash de 100g, cheddar derretido, bacon crocante, cebola caramelizada e molho da casa. Com batata e Coca-Cola lata." },
+  { num:"19", cat:"individual", nome:"Combo Nosso Clássico", preco:39.90, img:"19.jpg",
+    desc:"Pão de brioche, blend de 150g, cheddar derretido, bacon crocante e cebola caramelizada. Com batata e Coca-Cola lata." },
+  { num:"18", cat:"individual", nome:"Nosso Clássico Catupiry", preco:39.90, img:"18.jpg",
+    desc:"Pão de brioche, blend de 150g, catupiry original, bacon crocante, cebola caramelizada e molho da casa. Com batata e Coca-Cola lata." },
+  { num:"9", cat:"individual", tag:"Lançamento", nome:"Combo Nosso Fit", preco:39.90, img:"9.jpg",
+    desc:"Pão de brioche, blend de 150g, muçarela derretida, alface, tomate e cebola roxa. Com batata e Coca-Cola Zero lata." },
+  { num:"24", cat:"individual", nome:"Combo Duplo Smash Bacon", preco:39.90, img:"24.jpg",
+    desc:"2 smash + 4 cheddar, bacon, cebola caramelizada e molho da casa. Com batata e Coca-Cola lata." },
+  { num:"11", cat:"individual", nome:"Combo Nosso Leve", preco:41.90, img:"11.jpg",
+    desc:"Pão de brioche, blend de 150g, cheddar, alface, tomate, cebola roxa, bacon crocante e molho da casa. Com batata e Coca-Cola lata." },
+  { num:"25", cat:"individual", tag:"Lançamento", nome:"Combo Nosso Duplo Smash Salada", preco:41.90, img:"25.jpg",
+    desc:"Pão de brioche, dois smashs, cheddar, bacon crocante, alface, tomate, cebola roxa e molho da casa. Com batata e Coca-Cola lata." },
+  { num:"22", cat:"individual", nome:"Combo Nosso Crocante", preco:45.90, img:"22.jpg",
+    desc:"Burger com cebola crocante empanada. Com batata frita e Coca-Cola lata." },
+  { num:"13", cat:"individual", nome:"Combo Triplo Smash Bacon", preco:49.90, img:"13.jpg",
+    desc:"Três smashs, bacon crocante, muito cheddar, cebola caramelizada, molho da casa e pão brioche. Com batata e Coca-Cola lata." },
+
+  // ---- Para dois
+  { num:"27", cat:"casal", nome:"Combo Nossa", preco:49.90, img:"27.jpg",
+    desc:"2 smash, 2 batatas e 1 Guaraná Antarctica 1L." },
+  { num:"1", cat:"casal", nome:"Combo Nossa Chicken", preco:52.90, img:"1.jpg",
+    desc:"2 hambúrgueres de frango, 2 batatas fritas e 1 Guaraná Antarctica 1L." },
+  { num:"4", cat:"casal", nome:"Combo Casal Nosso Smash Bacon", preco:68.90, img:"4.jpg",
+    desc:"2 Nossos Smash Bacon, 2 batatas fritas e Coca-Cola 1,5L." },
+  { num:"8", cat:"casal", nome:"Combo Casal Fit", preco:78.90, img:"8.jpg",
+    desc:"2 Nosso Fit (blend 150g, muçarela, alface, tomate, cebola roxa), 2 batatas e Coca-Cola Zero 1,5L." },
+  { num:"16", cat:"casal", nome:"Combo Casal Nosso Clássico", preco:78.90, img:"16.jpg",
+    desc:"2 hambúrgueres Nosso Clássico, 2 batatas fritas e Coca-Cola 1,5L." },
+  { num:"17", cat:"casal", nome:"Combo Casal Clássico Catupiry", preco:78.90, img:"17.jpg",
+    desc:"2 Clássico Catupiry, 2 batatas e Coca-Cola 1,5L." },
+  { num:"23", cat:"casal", nome:"Combo Casal Duplo Smash Bacon", preco:78.90, img:"23.jpg",
+    desc:"2 Duplo Smash Bacon (2 smash + 4 cheddar), 2 batatas fritas e Coca-Cola 1,5L." },
+  { num:"10", cat:"casal", nome:"Combo Casal Nosso Leve", preco:81.90, img:"10.jpg",
+    desc:"2 hambúrgueres Nosso Leve, 2 batatas fritas e Coca-Cola 1,5L." },
+  { num:"21", cat:"casal", nome:"Combo Casal Crocante", preco:89.90, img:"21.jpg",
+    desc:"2 Crocantes, 2 batatas fritas e Coca-Cola 1,5L." },
+  { num:"12", cat:"casal", nome:"Combo Casal Triplo Smash Bacon", preco:98.90, img:"12.jpg",
+    desc:"2 Triplo Smash Bacon, 2 batatas fritas e Coca-Cola 1,5L." },
+  { num:"20", cat:"casal", nome:"Combo Casal Nosso Supremo", preco:98.90, img:"20.jpg",
+    desc:"2 burgers com 2 blends de 150g, cheddar, bacon crocante, cebola caramelizada e molho da casa. 2 batatas e Coca-Cola 1,5L." },
+
+  // ---- Família
+  { num:"6", cat:"familia", nome:"Combo Família 1", preco:98.90, img:"6.jpg",
+    desc:"2 Nosso Clássico, 1 Smash, 3 batatas e Coca-Cola 1,5L." },
+  { num:"7", cat:"familia", nome:"Combo Família 2", preco:117.90, img:"7.jpg",
+    desc:"2 Nosso Clássico, 2 Smash, 4 batatas e Coca-Cola 1,5L." },
+
+  // ---- Porções
+  { num:"14A", cat:"porcoes", tag:"Novidade", nome:"Porção de Nuggets", preco:7.90, img:"14.jpg",
+    desc:"Porção com 6 unidades." },
+  { num:"14B", cat:"porcoes", tag:"Novidade", nome:"Porção de Anéis de Cebola", preco:7.90, img:"14.jpg",
+    desc:"Porção com 6 unidades." },
+  { num:"3", cat:"porcoes", tag:"Lançamento", nome:"Batata com Cheddar e Bacon", preco:18.90, img:"3.jpg",
+    desc:"250g de batata, molho cheddar e farofa de bacon." },
+];
+
+/* ===================================================================== */
+const $ = s => document.querySelector(s);
+const brl = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const WA_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.03c-.24.68-1.42 1.3-1.95 1.36-.5.06-1.13.08-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.8-4.18-4.94-4.37-.14-.19-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.26-.29.58-.36.77-.36h.55c.18 0 .42-.07.65.5.24.58.82 2 .89 2.15.07.14.12.31.02.5-.1.19-.14.31-.29.48-.14.17-.3.38-.43.5-.14.14-.29.3-.13.59.17.29.74 1.22 1.59 1.97 1.09.97 2.01 1.27 2.3 1.42.29.14.46.12.62-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.65-.14.26.1 1.68.79 1.97.94.29.14.48.22.55.34.07.12.07.7-.17 1.38Z"/></svg>';
+
+function waLink(texto){ return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(texto); }
+
+function msgPedido(it){
+  let t = `*PEDIDO Nº ${it.num} — ${it.nome.toUpperCase()}*\n`
+        + `${brl(it.preco)}\n\n`
+        + `Olá, ${LOJA}! Quero fazer esse pedido 🍔`;
+  if (MOSTRAR_LINK_FOTO) {
+    const foto = new URL("img/" + it.img, location.href).href;
+    if (foto.startsWith("http")) t += `\n\nFoto: ${foto}`;
+  }
+  return t;
+}
+
+/* --- status aberto/fechado (horário de Brasília) --- */
+function atualizaStatus(){
+  const h = Number(new Intl.DateTimeFormat("pt-BR",{hour:"numeric",hour12:false,timeZone:"America/Sao_Paulo"}).format(new Date())) % 24;
+  const aberto = h >= ABRE && h < FECHA;
+  const el = $("#status");
+  el.classList.toggle("open", aberto); el.classList.toggle("closed", !aberto);
+  $("#statusTxt").textContent = aberto ? "Aberto agora · até 00h" : "Fechado · abrimos às 18h";
+}
+
+/* --- render --- */
+let filtro = "todos";
+function render(){
+  const q = $("#q").value.trim().toLowerCase().replace(/^n[ºo°]?\s*/,"");
+  const menu = $("#menu"); menu.innerHTML = "";
+  let total = 0;
+  for (const c of CATEGORIAS){
+    if (filtro !== "todos" && filtro !== c.id) continue;
+    const itens = ITENS.filter(i => i.cat === c.id && (!q ||
+      i.num.toLowerCase() === q || i.nome.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q)));
+    if (!itens.length) continue;
+    total += itens.length;
+    const sec = document.createElement("section");
+    sec.className = "section"; sec.id = c.id;
+    sec.innerHTML = `<h2>${c.nome} <small>${c.sub}</small></h2><div class="grid"></div>`;
+    const grid = sec.querySelector(".grid");
+    for (const it of itens){
+      const card = document.createElement("article");
+      card.className = "card"; card.id = "pedido-" + it.num;
+      card.innerHTML = `
+        <div class="ph">
+          <img src="img/${it.img}" alt="${it.nome}" loading="lazy">
+          <button aria-label="Ampliar foto de ${it.nome}"></button>
+          <span class="num">${it.num}</span>
+          ${it.tag ? `<span class="badge">${it.tag}</span>` : ""}
+        </div>
+        <div class="body">
+          <h3>${it.nome}</h3>
+          <p class="desc">${it.desc}</p>
+          <div class="foot">
+            <span class="price">${brl(it.preco)}</span>
+            <a class="btn" href="${waLink(msgPedido(it))}" target="_blank" rel="noopener">${WA_ICON} Pedir nº ${it.num}</a>
+          </div>
+        </div>`;
+      card.querySelector(".ph button").onclick = () => abrir(it);
+      grid.appendChild(card);
+    }
+    menu.appendChild(sec);
+  }
+  $("#empty").style.display = total ? "none" : "block";
+}
+
+function chips(){
+  const box = $("#chips");
+  const lista = [{id:"todos",nome:"Todos"}, ...CATEGORIAS];
+  box.innerHTML = lista.map(c => `<button class="chip" data-id="${c.id}" aria-pressed="${c.id===filtro}">${c.nome}</button>`).join("");
+  box.onclick = e => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    filtro = b.dataset.id;
+    box.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x === b));
+    render();
+    window.scrollTo({top: $("#menu").offsetTop - 70, behavior:"smooth"});
+  };
+}
+
+/* --- foto ampliada --- */
+const lb = $("#lb");
+function abrir(it){
+  $("#lbImg").src = "img/" + it.img; $("#lbImg").alt = it.nome;
+  $("#lbName").textContent = `Nº ${it.num} · ${it.nome}`;
+  $("#lbPrice").textContent = brl(it.preco);
+  $("#lbBtn").href = waLink(msgPedido(it));
+  $("#lbBtn").innerHTML = WA_ICON + " Pedir";
+  lb.showModal();
+}
+$("#lbClose").onclick = () => lb.close();
+lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
+
+/* --- links gerais --- */
+const geral = waLink(`Olá, ${LOJA}! Gostaria de fazer um pedido 🍔`);
+$("#fab").href = geral; $("#fab").innerHTML = WA_ICON + " Fale conosco";
+$("#waFooter").href = geral;
+$("#q").addEventListener("input", render);
+
+chips(); render(); atualizaStatus(); setInterval(atualizaStatus, 60000);
+
+/* abre direto um item: site.com/#pedido-4 */
+if (location.hash.startsWith("#pedido-")){
+  const it = ITENS.find(i => "#pedido-" + i.num === location.hash);
+  if (it) setTimeout(() => { document.getElementById("pedido-"+it.num)?.scrollIntoView({block:"center"}); }, 50);
+}
+</script>
+</body>
+</html>
